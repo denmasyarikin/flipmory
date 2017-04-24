@@ -1,0 +1,6 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
+{% set icon = options.icon is defined ? options.icon : 'search' %}
+
+{{ buttons.show(path, action.label, null, 'green', false, icon) }}

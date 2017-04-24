@@ -1,0 +1,62 @@
+{% macro default(url, message, id, icon, class, labeled = true) %}
+    <a class="ui mini {% if message is not empty and labeled %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {% if not labeled %}data-tooltip="{{ message|trans }}" data-inverted{% endif %}>
+        {% if icon is not empty %}
+            <i class="icon {{ icon }}"></i>
+        {% endif %}
+        {% if message is not empty and labeled %}
+            {{ message|trans }}
+        {% endif %}
+    </a>
+{% endmacro %}
+
+{% macro show(url, message, id, class, labeled = true, icon = 'search') %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.ui.show' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, icon, class, labeled) }}
+{% endmacro %}
+
+{% macro create(url, message, id, labeled = true) %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.ui.create' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, 'plus', 'primary', labeled) }}
+{% endmacro %}
+
+{% macro edit(url, message, id, labeled = true) %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.ui.edit' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, 'pencil', 'orange', labeled) }}
+{% endmacro %}
+
+{% macro filter(message) %}
+    <button class="ui blue labeled icon button" type="submit">
+        <i class="icon search"></i> {{ message is empty ? 'sylius.ui.filter'|trans : message }}
+    </button>
+{% endmacro %}
+
+{% macro resetFilters(url, message) %}
+    <a class="ui labeled icon button" href="{{ url }}">
+        <i class="icon remove"></i> {{ message is empty ? 'sylius.ui.clear_filters'|trans : message }}
+    </a>
+{% endmacro %}
+
+{% macro delete(url, message, labeled = true, resourceId = null) %}
+    <form action="{{ url }}" method="post" style="display:inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="ui mini red {% if labeled %}labeled {% endif %}icon button" type="submit" data-requires-confirmation {% if not labeled %}data-tooltip="{{ 'sylius.ui.delete'|trans }}" data-inverted{% endif %}>
+            <i class="icon trash"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
+        </button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
+    </form>
+{% endmacro %}
