@@ -1,0 +1,19 @@
+@import 'variables';
+
+.ui.top-heading {
+    background: $blue;
+    margin-bottom: -14px;
+    .right{
+        float: right;
+    }
+    .item {
+        display: inline-block;
+        color: $white;
+        padding: 2px 20px;
+    }
+}
+
+.logo {
+    display: inline-block;
+    margin: -8px 0;
+}

@@ -1,0 +1,54 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div id="sylius-cart-button" class="ui circular basic cart button">
+    {{ sonata_block_render_event('sylius.shop.partial.cart.summary.before_widget_content', {'cart': cart}) }}
+
+    <i class="shopping bag icon"></i>
+    <span id="sylius-cart-total">{{cart.items|length}}</span>
+
+    {{ sonata_block_render_event('sylius.shop.partial.cart.summary.after_widget_content', {'cart': cart}) }}
+</div>
+
+<div class="ui small flowing cart hidden popup">
+    {{ sonata_block_render_event('sylius.shop.partial.cart.summary.before_popup_content', {'cart': cart}) }}
+
+    {% if cart.empty %}
+        <div style="text-align:center;margin:30px 0">
+            <i class="huge disabled frown icon"></i>
+            <p>{{ 'sylius.ui.your_cart_is_empty'|trans }}.</p>
+        </div>
+    {% else %}
+    <div class="ui two column grid">
+        <div class="column">
+            <strong>{{ 'sylius.ui.total'|trans }}</strong> : {{ cart.items|length }} {{ 'sylius.ui.items'|trans }}
+        </div>
+        <div class="right aligned column">
+            <a href="{{ path('sylius_shop_cart_summary') }}">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+        </div>
+    </div>
+    <div class="ui divider" style="margin:2px 0"></div>
+    <div class="ui relaxed divided list">
+        {% for item in cart.items %}
+            <div class="item">
+                <div class="right floated content">
+                    {{ money.convertAndFormat(item.unitPrice) }} x {{ item.quantity }}
+                </div>
+                <div class="content">
+                    <b class="header">{{ item.product }}</b>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="ui divider" style="margin:2px 0 8px"></div>
+    <div class="ui two column grid">
+        <div class="column">
+            <strong>{{ 'sylius.ui.subtotal'|trans }}</strong> : {{ money.convertAndFormat(cart.itemsTotal) }}
+        </div>
+        <div class="column">
+            <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
+        </div>
+    </div>
+    {% endif %}
+
+    {{ sonata_block_render_event('sylius.shop.partial.cart.summary.after_popup_content', {'cart': cart}) }}
+</div>

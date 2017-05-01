@@ -1,0 +1,14 @@
+{
+    "name": "denmasyarikin/semantic",
+    "title": "Semantic",
+    "type": "sylius-theme",
+    "description": "Sylius theme semantic ui based",
+    "authors": [
+        {
+            "name": "Denma Syarikin",
+            "email": "denmasyarikin@gmail.com",
+            "homepage": "http://denmasyarikin.com",
+            "role": "Developer"
+        }
+    ]
+}
