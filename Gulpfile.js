@@ -15,9 +15,22 @@ gulp.task('admin', function() {
     ;
 });
 
+// gulp.task('shop', function() {
+//     gulp.src('vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Gulpfile.js', { read: false })
+//         .pipe(chug({ args: config }))
+//     ;
+// });
+
 gulp.task('shop', function() {
-    gulp.src('vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Gulpfile.js', { read: false })
-        .pipe(chug({ args: config }))
+    gulp.src('app/Resources/SyliusShopBundle/Gulpfile.js', { read: false })
+        .pipe(chug({ args: [
+            '--rootPath',
+            argv.rootPath || '../../../web/assets/',
+            '--nodeModulesPath',
+            argv.nodeModulesPath || '../../../node_modules/',
+            '--vendorPath',
+            argv.vendorPath || '../../../vendor/sylius/sylius/src/Sylius/Bundle/'
+        ] }))
     ;
 });
 

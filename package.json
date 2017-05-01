@@ -2,7 +2,7 @@
   "dependencies": {
     "jquery": "^2.2.0",
     "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0"
+    "semantic-ui-css": "^2.2.10",
   },
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -20,6 +20,7 @@
     "yargs": "^6.4.0"
   },
   "scripts": {
+    "postinstall": "mv ./node_modules/semantic-ui-less/theme.config.example ./node_modules/semantic-ui-less/theme.config",
     "gulp": "gulp"
   },
   "repository": {

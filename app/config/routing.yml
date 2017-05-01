@@ -5,21 +5,20 @@ sylius_admin:
     resource: "@SyliusAdminBundle/Resources/config/routing.yml"
     prefix: /admin
 
+lakion_cms_admin:
+    resource: "@LakionCmsPlugin/Resources/config/app/admin_routing.yml"
+    prefix: /admin # root path of SyliusAdmin
+
 sylius_api:
     resource: "@SyliusAdminApiBundle/Resources/config/routing.yml"
     prefix: /api
 
 sylius_shop:
     resource: "@SyliusShopBundle/Resources/config/routing.yml"
-    prefix: /{_locale}
-    requirements:
-        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+    prefix: /
 
 sylius_shop_payum:
     resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 
-sylius_shop_default_locale:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.shop.locale_switch:switchAction
+lakion_cms_shop:
+    resource: "@LakionCmsPlugin/Resources/config/app/shop_routing.yml"

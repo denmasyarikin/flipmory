@@ -28,6 +28,15 @@ class AppKernel extends Kernel
 
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusApiBundle
             new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
+            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
+            
+            new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
+            new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
+            new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
+            new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
+            new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
+            new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new \Lakion\CmsPlugin\LakionCmsPlugin(),
 
             new \AppBundle\AppBundle(),
         ];

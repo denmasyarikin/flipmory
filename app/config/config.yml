@@ -6,15 +6,14 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
-
+    - { resource: "@LakionCmsPlugin/Resources/config/app/config.yml" }
+    
+    - { resource: "services.yml" }
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
 
-parameters:
-    locale: en_US
-
 framework:
-    translator: { fallbacks: ["%locale%"] }
+    translator: { fallbacks: ["%locale%", "en"] }
     secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -61,3 +60,27 @@ fos_rest:
         rules:
             - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }
+
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            connection: default
+        workspace: default
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
+
+sylius_resource:
+     drivers:
+        - doctrine/orm
+        - doctrine/phpcr-odm
+
+sylius_grid:
+     drivers:
+        - doctrine/orm
+        - doctrine/phpcr-odm
+
+sylius_theme:
+    sources:
+        filesystem: ~
